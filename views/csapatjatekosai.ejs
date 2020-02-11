@@ -1,0 +1,51 @@
+<%- include('header') -%>
+<%- include('menu') -%>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h2><%= csapat.csapatnev %> játékosai:</h2>
+            <table class="table table-striped table-bordered">
+                <tr>
+                    <th>
+                        Név
+                    </th>
+                    <th>
+                        Mezszám
+                    </th>
+                    <th>
+                        Teljesítmény
+                    </th>
+                    <th>
+                        &nbsp;
+                    </th>
+                </tr>
+                <% jatekosok.forEach(function(egyJatekos){ %>
+                    <tr>
+                        <td>
+                            <%= egyJatekos.nev %>
+                        </td>
+                        <td>
+                            <%= egyJatekos.mezszam %>
+                        </td>
+                        <td>
+                            <%= egyJatekos.teljesitmeny %>
+                        </td>
+                        <td style="width:30px;white-space: nowrap">
+                            <a href="/jatekos/<%= csapat._id %>/edit/<%= egyJatekos._id %>"
+                               class="btn btn-sm btn-primary"><i
+                                        class="far fa-edit"></i></a>
+                            <a href="/jatekos/<%= csapat._id %>/del/<%= egyJatekos._id %>"
+                               class="btn btn-sm btn-danger"><i
+                                        class="far fa-trash-alt"></i></a>
+                        </td>
+                    </tr>
+                <% }); %>
+            </table>
+            <br/>
+            <a href="/jatekos/<%= csapat._id %>/new" class="btn btn-block btn-primary">Új játékos felvétele</a>
+        </div>
+    </div>
+</div>
+
+<%- include('footer') -%>

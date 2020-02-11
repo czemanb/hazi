@@ -1,16 +1,16 @@
-const authMW = require('../middleware/auth/authMW');
-const checkPassMW = require('../middleware/auth/checkPassMW');
-const logoutMW = require('../middleware/auth/logoutMW');
-const renderMW = require('../middleware/renderMW');
-const delJatekosMW = require('../middleware/jatekos/delJatekosMW');
-const getJatekosokMW = require('../middleware/jatekos/getJatekosokMW');
-const getJatekosMW = require('../middleware/jatekos/getJatekosMW');
-const saveJatekosMW = require('../middleware/jatekos/saveJatekosMW');
-const delCsapatMW = require('../middleware/csapat/delCsapatMW');
-const getCsapatokMW = require('../middleware/csapat/getCsapatokMW');
-const getCsapatMW = require('../middleware/csapat/getCsapatMW');
-const getTopCsapatokMW = require('../middleware/csapat/getTopCsapatokMW');
-const saveCsapatMW = require('../middleware/csapat/saveCsapatMW');
+const authMW = require('../middlewares/auth/authMW');
+const checkPassMW = require('../middlewares/auth/checkPassMW');
+const logoutMW = require('../middlewares/auth/logoutMW');
+const renderMW = require('../middlewares/renderMW');
+const delJatekosMW = require('../middlewares/jatekos/delJatekosMW');
+const getJatekosokMW = require('../middlewares/jatekos/getJatekosokMW');
+const getJatekosMW = require('../middlewares/jatekos/getJatekosMW');
+const saveJatekosMW = require('../middlewares/jatekos/saveJatekosMW');
+const delCsapatMW = require('../middlewares/csapat/delCsapatMW');
+const getCsapatokMW = require('../middlewares/csapat/getCsapatokMW');
+const getCsapatMW = require('../middlewares/csapat/getCsapatMW');
+const getTopCsapatokMW = require('../middlewares/csapat/getTopCsapatokMW');
+const saveCsapatMW = require('../middlewares/csapat/saveCsapatMW');
 
 const CsapatModel = require('../models/csapat');
 const JatekosModel = require('../models/jatekos');
@@ -18,7 +18,7 @@ const JatekosModel = require('../models/jatekos');
 module.exports = function(app) {
     const objRepo = {
         CsapatModel: CsapatModel,
-        JatekosModel: JatekostModel
+        JatekosModel: JatekosModel
     };
 
     app.use('/csapat/new',
@@ -42,12 +42,12 @@ module.exports = function(app) {
     app.get(
         '/csapat',
         authMW(objRepo),
-        getCsapatkMW(objRepo),
+        getCsapatokMW(objRepo),
         renderMW(objRepo, 'csapatlista')
     );
 
     app.use(
-        '/jatekos/:jatekosid/new',
+        '/jatekos/:csapatid/new',
         authMW(objRepo),
         getCsapatMW(objRepo),
         saveJatekosMW(objRepo),
@@ -70,10 +70,10 @@ module.exports = function(app) {
         renderMW(objRepo, 'jatekosedit')
     );
     app.get(
-        '/jatekos/:jatekosid',
+        '/jatekos/:csapatid',
         authMW(objRepo),
-        getNagymamaMW(objRepo),
-        getBefottekMW(objRepo),
+        getCsapatMW(objRepo),
+        getJatekosokMW(objRepo),
         renderMW(objRepo, 'csapatjatekosai')
     );
 

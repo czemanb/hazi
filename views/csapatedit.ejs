@@ -1,0 +1,35 @@
+<%- include('header') -%>
+<%- include('menu') -%>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h2>Csapat
+                <% if (typeof csapat === 'undefined') { %>
+                    Létrehozás
+                <% }else{ %>
+                    Módosítás
+                <% } %>
+            </h2>
+            <form method="POST">
+                <div class="form-group">
+                    <label for="csapatnev">Csapatnév</label>
+                    <input type="text" class="form-control" id="csapatnev" name="csapatnev"
+                           value="<%= (typeof csapat === 'undefined') ? '' : csapat.csapatnev %>">
+                </div>
+                <div class="form-group">
+                    <label for="varos">Város</label>
+                    <input type="text" class="form-control" id="varos" name="varos"
+                           value="<%= (typeof csapat === 'undefined') ? '' : csapat.varos %>">
+                </div>
+                <div class="form-group">
+                    <label for="stadion">Stadion</label>
+                    <input type="text" class="form-control" id="stadion" name="stadion"
+                           value="<%= (typeof csapat === 'undefined') ? '' : csapat.stadion %>">
+                </div>
+                <input type="submit" class="btn btn-primary" value="Mentés"/>
+                <a class="btn btn-link" href="/csapat">Mégsem</a>
+            </form>
+        </div>
+    </div>
+</div>
+<%- include('footer') -%>
